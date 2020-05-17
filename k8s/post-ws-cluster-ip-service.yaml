@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-ws-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: post-ws
+  ports:
+  - port: 8080
+    targetPort: 8080

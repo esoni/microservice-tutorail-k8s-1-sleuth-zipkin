@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comment-ws-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      component: comment-ws
+  template:
+    metadata:
+      labels:
+        component: comment-ws
+    spec:
+      containers:
+      - name: comment-ws
+        image: dariofrongillo/comment-ws:1.0.1
+        ports:
+        - containerPort: 8081
+        env:
+          - name: MYSQL_ROOT_USERNAME_COMMENT_DB
+            value: root
+          - name: MYSQL_ROOT_PASSWORD_COMMENT_DB
+            valueFrom:
+                secretKeyRef:
+                  name: dbpassword
+                  key: MYSQL_ROOT_PASSWORD_COMMENT_DB
+          - name: MYSQL_HOST_COMMENT_DB
+            value: mysql-comment-cluster-ip-service
+          - name: MYSQL_PORT_COMMENT_DB
+            value: '3306'
+          - name: SPRING_PROFILE
+            value: docker

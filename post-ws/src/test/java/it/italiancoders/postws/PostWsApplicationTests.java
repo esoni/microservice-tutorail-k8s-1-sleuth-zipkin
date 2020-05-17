@@ -1,0 +1,13 @@
+package it.italiancoders.postws;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class PostWsApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}

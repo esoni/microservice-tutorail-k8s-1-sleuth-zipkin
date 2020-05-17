@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-ws-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: post-ws
+  template:
+    metadata:
+      labels:
+        component: post-ws
+    spec:
+      containers:
+      - name: post-ws
+        image: dariofrongillo/post-ws:1.0.1
+        ports:
+        - containerPort: 8080
+        env:
+          - name: MYSQL_ROOT_USERNAME_POST_DB
+            value: root
+          - name: MYSQL_ROOT_PASSWORD_POST_DB
+            valueFrom:
+                secretKeyRef:
+                  name: dbpassword
+                  key: MYSQL_ROOT_PASSWORD_POST_DB
+          - name: MYSQL_HOST_POST_DB
+            value: mysql-post-cluster-ip-service
+          - name: MYSQL_PORT_POST_DB
+            value: '3306'
+          - name: COMMENT_WS_PORT
+            value: '8081'
+          - name: COMMENT_WS_IP
+            value: comment-ws-cluster-ip-service
+          - name: SPRING_PROFILE
+            value: docker
+            
