@@ -1,4 +1,4 @@
-package it.italiancoders.postws.model.controller.post;
+package it.italiancoders.postws.controller.post;
 
 import feign.FeignException;
 import it.italiancoders.postws.model.dto.Comment;
