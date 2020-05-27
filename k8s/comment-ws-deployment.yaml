@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: comment-ws
-        image: dariofrongillo/comment-ws:1.0.1
+        image: dariofrongillo/comment-ws:2.0.1
         ports:
         - containerPort: 8081
         env:
@@ -31,3 +31,7 @@ spec:
             value: '3306'
           - name: SPRING_PROFILE
             value: docker
+          - name: ZIPKIN_IP
+            value: zipkin-cluster-ip-service
+          - name: ZIPKING_PORT
+            value: '9411'            

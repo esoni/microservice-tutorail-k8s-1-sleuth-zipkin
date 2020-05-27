@@ -105,6 +105,7 @@ public class PostController {
     public ResponseEntity<Comment> inserComment(@PathVariable Long id, @Valid @RequestBody CommentRequest commentRequest) throws Exception {
         log();
         this.postService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post not found"));
+        log.info("before to call Comment-ws");
         Comment comment = null;
         try {
             comment = commentServiceClient.insertComment(id, commentRequest);
@@ -112,6 +113,7 @@ public class PostController {
             log.error("Exception during insert comment [{}] of post [{}]: [{}]", commentRequest, id, exc);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exc.getMessage());
         }
+        log.info("after call Comment-ws");
         return ResponseEntity.ok(comment);
     }
 }

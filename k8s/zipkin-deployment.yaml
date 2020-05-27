@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zipkin-ws-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: zipkin
+  template:
+    metadata:
+      labels:
+        component: zipkin
+    spec:
+      containers:
+      - name: zipkin
+        image: openzipkin/zipkin
+        ports:
+        - containerPort: 9411
+        env:
+            # note: in-memory storage holds all data in memory, purging older data upon a span limit.
+            #       you should use a proper storage in production environments        
+          - name: STORAGE_TYPE
+            value: mem

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: post-ws
-        image: dariofrongillo/post-ws:1.0.1
+        image: dariofrongillo/post-ws:2.0.0
         ports:
         - containerPort: 8080
         env:
@@ -35,4 +35,7 @@ spec:
             value: comment-ws-cluster-ip-service
           - name: SPRING_PROFILE
             value: docker
-            
+          - name: ZIPKIN_IP
+            value: zipkin-cluster-ip-service
+          - name: ZIPKING_PORT
+            value: '9411'            
